@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
-//Container(
-//           height: 300,
-//           width: 300,
-//           child: Text('${controller.items.value.articles?.length}')
-//       )
+
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    controller.getNewsDataCall();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Business Today'),
@@ -25,6 +21,7 @@ class HomeView extends GetView<HomeController> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: ExpansionTile(
+            trailing: const SizedBox(),
             leading: Container(
               height: 260,
               width: 60,
@@ -39,7 +36,25 @@ class HomeView extends GetView<HomeController> {
                 fontSize: 23,
               fontWeight: FontWeight.w700
           ),),
-            subtitle: Text("Published Time: ${controller.items.value.articles?[index].publishedAt}"),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Text("Published Time: ${controller.items.value.articles?[index].publishedAt}",style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500
+                ),),
+                SizedBox(
+                  height: 10,
+                ),
+                Text("Author: ${controller.items.value.articles?[index].author}",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500
+                ),)
+              ],
+            ),
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),

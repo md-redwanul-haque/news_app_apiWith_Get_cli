@@ -14,6 +14,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    getNewsDataCall();
     super.onInit();
 
   }
@@ -28,7 +29,7 @@ class HomeController extends GetxController {
   void increment() => count.value++;
 
 
-  var itmeList = <Articles>[].obs;
+
   var items =GetNews().obs;
 
   Future<GetNews> getNewsDataCall() async{
@@ -38,9 +39,8 @@ class HomeController extends GetxController {
     if(response.statusCode!=200){
       return Future.error(response.body);
     }else{
-      log(GetNews.fromJson(jsonDecode(response.body)).toString());
       items.value=GetNews.fromJson(jsonDecode(response.body));
-      return GetNews.fromJson(jsonDecode(response.body));
+      return items.value;
     }
   }
 
